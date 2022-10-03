@@ -1,0 +1,44 @@
+﻿@*Since the  model is a collection of views [List of movies] *@
+
+@using System.Collections
+
+                         @*Define list of movie using IEnumerable or List*@
+@model IEnumerable<Movie>
+
+                         @*to set title of movies page*@
+@{
+    ViewData["Title"] = "Movies";
+}
+                         @*Using h tag to write Head of page*@
+<h3>Movies</h3>
+
+                         @*creat button to open page allow to add movie*@
+                         @*btn btn=primary is bootstrap class*@
+<a class="btn btn-primary" asp-action="Create">Add Movies</a>
+                         @*add area which the movies will apper in it*@
+                         @*using div tag to make content away from button*@
+<div class="mt-lg-4">
+    @*cheeck if no movies in DB using c# code*@
+
+
+    @if((!Model.Any()))   @* Any return bool if no movies print alert massage*@
+    {
+ <div class="alert alert-danger" role="alert">
+            No Movies Found
+</div>
+    
+    }
+    else
+    {
+        <ul>
+            @foreach(var movie in Model)
+            {
+                            @*.Name is column in table movie in Db*@
+             <li> 
+                 @movie.Name
+             </li>}
+           
+        </ul>
+    }
+
+</div>
