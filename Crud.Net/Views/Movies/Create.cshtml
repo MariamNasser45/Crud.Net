@@ -1,0 +1,26 @@
+﻿                   @* Define MovieFormView is a Model *@
+
+                   @*Now we make same steps which we made in the index.cdjtml*@
+
+@model MovieFormViewModel
+
+@{
+    ViewData["Title"]= "Movie form";
+}
+
+<h2>Creat Movie</h2>
+
+<hr />    @*to add new line*@
+
+<form method="post" asp-action="Create" >
+                           @*taking classes from bootstrap to creat the view of model*@
+
+    <div class="form-group">
+
+        <lable class="text-muted" asp-for="Name"></lable>  @*Name is column in DB*@
+        <input type="text" class="form-control"asp-for="Name" maxlength="250"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+
+</form>

@@ -3,6 +3,7 @@
 @using System.Collections
 
                          @*Define list of movie using IEnumerable or List*@
+
 @model IEnumerable<Movie>
 
                          @*to set title of movies page*@
@@ -10,32 +11,48 @@
     ViewData["Title"] = "Movies";
 }
                          @*Using h tag to write Head of page*@
-<h3>Movies</h3>
+<h3>
+                         @*now we add icon from bootstrap behind Movies*@
+
+    <i class="bi bi-film"></i>  
+    Movies
+
+</h3>
 
                          @*creat button to open page allow to add movie*@
                          @*btn btn=primary is bootstrap class*@
-<a class="btn btn-primary" asp-action="Create">Add Movies</a>
+                         @*asp-action : is the page will open when press on button *@
+
+<a  class="btn btn-primary" asp-action="Create"> 
+    <i class="bi bi-file-earmark-plus-fill"></i>  
+    Add Movies
+</a>
+
                          @*add area which the movies will apper in it*@
                          @*using div tag to make content away from button*@
+
 <div class="mt-lg-4">
-    @*cheeck if no movies in DB using c# code*@
 
+                         @*cheeck if no movies in DB using c# code*@                  
 
-    @if((!Model.Any()))   @* Any return bool if no movies print alert massage*@
+    @if ((!Model.Any())) @* Any :- returne bool, if no movies print alert massage*@
     {
- <div class="alert alert-danger" role="alert">
+       <div class="alert alert-danger" role="alert"> @*Taking style of Alert from Bootstrap*@
+
+            <i class="bi bi-info-square-fill"></i>
             No Movies Found
-</div>
-    
+
+       </div>
+
     }
     else
     {
         <ul>
             @foreach(var movie in Model)
             {
-                            @*.Name is column in table movie in Db*@
-             <li> 
-                 @movie.Name
+                            
+             <li>
+                    @movie.Name  @*.Name is column in table movie in Db*@
              </li>}
            
         </ul>
