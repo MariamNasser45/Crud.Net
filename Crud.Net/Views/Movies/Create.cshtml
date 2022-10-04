@@ -8,19 +8,47 @@
     ViewData["Title"]= "Movie form";
 }
 
-<h2>Creat Movie</h2>
+<h1>Create Movies</h1>
 
-<hr />    @*to add new line*@
+<br />    @*to add new line*@
 
-<form method="post" asp-action="Create" >
-                           @*taking classes from bootstrap to creat the view of model*@
+<section class="row">          @* this tag dividing row into 12 part*@
 
-    <div class="form-group">
+    <div class="col-md-4">     @* this tag appear area of row which contai 4 column only 3 column*@
 
-        <lable class="text-muted" asp-for="Name"></lable>  @*Name is column in DB*@
-        <input type="text" class="form-control"asp-for="Name" maxlength="250"/>
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <form method="post" asp-action="Create">     @*Creat:is the name of view *@
 
-    </div>
+              @*taking classes from bootstrap to creat the view of model*@
 
-</form>
+            <div class="form-group">
+
+                <lable class="text-muted" asp-for="Name">Title</lable> <br/> @*Name is column in DB*@
+                <input type="text" class="form-control" asp-for="Name" maxlength="250" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+
+            </div>
+
+                           @* Create drob down list to store all genres*@
+
+            <div class="form-group">
+
+                <lable class="text-muted" asp-for="GenreId">Genres</lable>  <br />
+
+                @*define posation of data , and data display to user*@
+                @*Id , Name attribute which defined in class Genre*@
+
+                <select class="form-control" asp-for="GenreId"
+                        asp-items="@(new SelectList(Model.Genres , "Id", "Name"))"> 
+                    <option></option>  @* used to make list empty for frist time*@
+
+                </select>
+
+                <span asp-validation-for="GenreId" class="text-danger"></span>
+
+            </div>
+
+        </form>
+
+    </div> 
+
+</section>

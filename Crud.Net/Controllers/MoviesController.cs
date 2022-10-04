@@ -16,7 +16,7 @@ namespace Crud.Net.Controllers
 
         private readonly ApplicationDbContext _Context;
 
-        // and makin instructor take instance of Dbcontext As prametere
+        // and making instructor take instance of Dbcontext As prametere
 
         public MoviesController(ApplicationDbContext Context)
         {
@@ -32,8 +32,9 @@ namespace Crud.Net.Controllers
             return View(movies); // return list of existing movies
         }
 
-                       //Implemention of creat page
-        public async Task<IActionResult> Creat()
+                      //Implemention of creat page
+    
+        public async Task<IActionResult> Create()
         {
             var viewmodel = new MovieFormViewModel
 
