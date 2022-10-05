@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net;
+using static Crud.Net.ViewModels.MovieFormViewModel;
+
 
 namespace Crud.Net.Controllers 
 {

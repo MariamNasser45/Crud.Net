@@ -16,3 +16,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* my style*/
+textarea
+{
+    resize: none;
+}
+label
+{
+    direction :ltr
+}

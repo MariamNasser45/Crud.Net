@@ -22,7 +22,7 @@
 
             <div class="form-group">
 
-                <lable class="text-muted" asp-for="Name">Title</lable> <br/> @*Name is column in DB*@
+                <label class="text-muted" asp-for=Name ></label> <br /> @*Name is column in MovieFormViewModel*@
                 <input type="text" class="form-control" asp-for="Name" maxlength="250" />
                 <span asp-validation-for="Name" class="text-danger"></span>
 
@@ -32,7 +32,7 @@
 
             <div class="form-group">
 
-                <lable class="text-muted" asp-for="GenreId">Genres</lable>  <br />
+                <label class="text-muted" asp-for="GenreId"></label>  <br />
 
                 @*define posation of data , and data display to user*@
                 @*Id , Name attribute which defined in class Genre*@
@@ -47,8 +47,94 @@
 
             </div>
 
+                       @*Create year field in creat view*@
+
+            <div class="form-group w-50" > @* w-50 : class of bootstrap to decreas space of feld*@
+
+            <label class="text-muted" asp-for="Year"></label> <br/>      @*Year is column in MovieFormViewModel*@
+            <input type="number" class="form-control" asp-for="Year"  value=" "/> @*using attribute value to make place is empty *@
+            <span asp-validation-for="Year" class="text-danger"></span>
+
+                @*too cancling arrows in year field using site.css*@
+
+            </div>
+                       @*Create rate field in creat view*@
+
+            <div class="form-group w-50">  @* w-50 : class of bootstrap to decreas space of field*@
+
+                <label class="text-muted" asp-for="Rate ">Rate </label> <br />      @*Rate is column in MovieFormViewModel*@
+                <input type="number" class="form-control" asp-for="Rate " value=" " /> @*using attribute value to make place is empty *@
+                <span asp-validation-for="Rate " class="text-danger"></span>
+
+            </div>
+
+                               @*Create History field in creat view*@
+
+            <div class="form-group">  
+
+                <label class="text-muted" asp-for="History"></label> <br />      @*History is column in MovieFormViewModel*@
+                <textarea class="form-control" asp-for="History" maxlength="2500" rows="5"> </textarea> @*using textarea : to write history , using row : to determine num of rows allow to user to write in them *@
+                <span asp-validation-for="History " class="text-danger"></span>
+
+                @*To making user can't change in size ot text area : in css 
+                    textarea { resize = null}
+                *@
+
+            </div> 
+
+                                @*Create poster in creat view
+
+                                 Note that : some changes in poster to apper in view
+
+                                 in poster : 1- input , 2- lable , 3- span
+
+                                *@
+
+
+           
+
+             <div class="custom-file">  @* here using file becous it not number or text *@
+
+
+                <label class="custom-file-label" asp-for=Poster dir="ltr"></label>
+                <input type="file" class="custom-file-input" asp-for="Poster" dir="ltr" accept="image/*" />
+
+                @*accept="image/*" : to allow to add images , if we spicify som exetinsion using accept=.png , .jpj*@
+
+                <span asp-validation-for=Poster class="text-danger"></span>
+
+              </div>
+              
+
+              @*creat two buttons
+                mt-4 : margin top used to space between field
+              *@
+              
+
+              <button type="submit" class="btn btn-primary mt-3">Save</button>
+              <a asp-action="Index" class="btn btn-outline-secondary mt-3">
+                  Cancel
+              </a>
+
         </form>
 
-    </div> 
+    </div>
 
+                   @* determine area which selected photo apper in it*@
+                  
+
+                   <div class="col-md-5" >
+
+                       <div  id="poster-container" class="d-none"> 
+                           @*Id to working with image csn we use class insted of id
+                              d-non : used to dissapper alrt until user select image
+                           *@
+
+                           <img src="" alt="There are No images" class="img-thumbnail" /> @*alt using to print massage in no exsist image*@
+                       </div>
+
+                   </div>
 </section>
+
+@* to render image in site using jquery or javascript*@
+
