@@ -16,7 +16,7 @@ namespace Crud.Net.ViewModels
         public int Year { get; set; }
 
         [Required, StringLength(2500)]
-        public string History { get; set; }
+        public string? History { get; set; }
 
         [Range (1, 10)] // Detrmine range which can be accepted according project
         public float Rate { get; set; }

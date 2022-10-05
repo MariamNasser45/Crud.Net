@@ -12,7 +12,7 @@
 
 <br />    @*to add new line*@
 
-<section class="row">          @* this tag dividing row into 12 part*@
+<section class="row justify-content-between ">          @* this tag dividing row into 12 part*@
 
     <div class="col-md-4">     @* this tag appear area of row which contai 4 column only 3 column*@
 
@@ -32,7 +32,7 @@
 
             <div class="form-group">
 
-                <label class="text-muted" asp-for="GenreId"></label>  <br />
+                <label class="text-muted" asp-for="GenreId"></label> 
 
                 @*define posation of data , and data display to user*@
                 @*Id , Name attribute which defined in class Genre*@
@@ -47,9 +47,9 @@
 
             </div>
 
-                       @*Create year field in creat view*@
+                       @*Create year field in view*@
 
-            <div class="form-group w-50" > @* w-50 : class of bootstrap to decreas space of feld*@
+            <div class="form-group w-50"  > @* w-50 : class of bootstrap to decreas space of feld*@
 
             <label class="text-muted" asp-for="Year"></label> <br/>      @*Year is column in MovieFormViewModel*@
             <input type="number" class="form-control" asp-for="Year"  value=" "/> @*using attribute value to make place is empty *@
@@ -62,7 +62,7 @@
 
             <div class="form-group w-50">  @* w-50 : class of bootstrap to decreas space of field*@
 
-                <label class="text-muted" asp-for="Rate ">Rate </label> <br />      @*Rate is column in MovieFormViewModel*@
+                <label class="text-muted" asp-for="Rate"></label> <br />      @*Rate is column in MovieFormViewModel*@
                 <input type="number" class="form-control" asp-for="Rate " value=" " /> @*using attribute value to make place is empty *@
                 <span asp-validation-for="Rate " class="text-danger"></span>
 
@@ -73,7 +73,7 @@
             <div class="form-group">  
 
                 <label class="text-muted" asp-for="History"></label> <br />      @*History is column in MovieFormViewModel*@
-                <textarea class="form-control" asp-for="History" maxlength="2500" rows="5"> </textarea> @*using textarea : to write history , using row : to determine num of rows allow to user to write in them *@
+                <textarea placeholder="Write story lines of movie" class="form-control" asp-for="History" maxlength="2500" rows="5"> </textarea> @*using textarea : to write history , using row : to determine num of rows allow to user to write in them *@
                 <span asp-validation-for="History " class="text-danger"></span>
 
                 @*To making user can't change in size ot text area : in css 
@@ -91,13 +91,14 @@
                                 *@
 
 
-           
-
-             <div class="custom-file">  @* here using file becous it not number or text *@
 
 
-                <label class="custom-file-label" asp-for=Poster dir="ltr"></label>
-                <input type="file" class="custom-file-input" asp-for="Poster" dir="ltr" accept="image/*" />
+            <div class="custom-file">
+                @* here using file becous it not number or text *@
+
+                <label class="custom-file-label" asp-for="Poster"></label>
+
+                <input type="file" class="custom-file-input" asp-for="Poster" accept="image/*" />
 
                 @*accept="image/*" : to allow to add images , if we spicify som exetinsion using accept=.png , .jpj*@
 
@@ -121,14 +122,14 @@
     </div>
 
                    @* determine area which selected photo apper in it*@
-                  
 
-                   <div class="col-md-5" >
 
-                       <div  id="poster-container" class="d-none"> 
-                           @*Id to working with image csn we use class insted of id
-                              d-non : used to dissapper alrt until user select image
-                           *@
+                       <div class="col-md-5">
+
+                   <div id="poster-container" class="d-none">
+
+                              @*Id to working with image csn we use class insted of id
+                              d-non : used to dissapper alrt until user select image *@
 
                            <img src="" alt="There are No images" class="img-thumbnail" /> @*alt using to print massage in no exsist image*@
                        </div>
@@ -138,3 +139,56 @@
 
 @* to render image in site using jquery or javascript*@
 
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial"); // to client side validation to work
+    }
+
+    <script>
+        $(document).ready(function(){                  // start of jquery
+
+            $('#Poster').on('change', function () {      // define the thing change occure in it
+
+              //console.log($(this).val().split('\\').pop) ... this way apper only in consol
+              // define the action will occure when the  poster will be changed
+              // consol create array taking 3 value but we need onle last vlue so we used .pop
+              
+              //since we need to appear image in site will usinf variabl
+
+                var selectedFile = $(this).val().split('\\').pop();
+
+                $(this).siblings('label').text(selectedFile); // to replace text in field with name of selected image
+
+               // this code to render 'show' image in site
+
+                var posterContainer = $("#poster-container"); //"poster-container" is the Id of last img code
+                                                             // anty change using "poster-container" will apply on image code line 134
+              
+                var image = window.URL.createObjectURL(this.files[0]);    // user select photo exist in array at index 0
+
+
+                posterContainer.removeClass('d-none'); // to appear in site must remoce class d-non "display"
+
+                posterContainer.find('img').attr('src', image) // to put source of img instead of src in previos img code
+
+            });// end of poster
+    
+                                // code for datepicker
+
+            $('#Year').datepicker({
+
+                   format: 'yyyy',
+                   viewMode: 'years',
+                   minViewMode: 'years',
+                   autoclose: true ,// to close ability of choose after user already choose
+                   startDate : new Date(1950-01-01), // making start year
+                   endtDate: new Date(2022-12-30) ,// making last year which we now
+
+            });
+
+        }); //end of document
+
+    </script>
+
+} @*end of section*@
