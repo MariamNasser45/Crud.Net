@@ -2,13 +2,17 @@
 
                    @*Now we make same steps which we made view of sice*@
 
+                   @*chanage form name from (Create) To (MovieForm) 
+                    inorder to using new name in return view instead of viewmodel
+                   *@
+
 @model MovieFormViewModel
 
 @{
-    ViewData["Title"]= "Movie form";
+    ViewData["Title"] = "Movie form";
 }
 
-<h1>Create Movies</h1>
+<h2> @(Model.Id > 0 ? "Edit" : "Create") Movie</h2>
 
 <br />    @*to add new line*@
 
@@ -21,7 +25,9 @@
 
            @*using enctype="application/x-www-form-urlencoded" to recieve files and post them to server *@
 
-        <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <form method="POST" asp-action= "@(Model.Id > 0 ? "Edit" : "Create")" enctype="multipart/form-data">
+
+            <input type="hidden" asp-for="Id" />  @* cearte edit form*@
 
               @*taking classes from bootstrap to creat the view of model*@
 
@@ -131,12 +137,20 @@
 
                        <div class="col-md-5">
 
-                   <div id="poster-container" class="d-none">
+        <div id="poster-container" class="@(Model.Id > 0 ? string.Empty:"d-none")">
+            @* we right with (d-none) this code to show only <div> tag contain  of img in edit form  *@
 
                               @*Id to working with image csn we use class insted of id
                               d-non : used to dissapper alrt until user select image *@
 
-                           <img src="" alt="There are No images" class="img-thumbnail" /> @*alt using to print massage in no exsist image*@
+                           <img src="@(Model.Id > 0 ? $"data:image/*;base64,{Convert.ToBase64String(Model.Poster)}" : string.Empty) "
+                                             alt="There are No images" class="img-thumbnail" /> 
+                         
+                           @*alt using to print massage in no exsist image*@
+                                                                                                                           
+                           @* code of source to render image "actully image" in edit form*@
+                     
+                       
                        </div>
 
                    </div>

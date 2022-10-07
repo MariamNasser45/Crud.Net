@@ -1,3 +1,5 @@
+                  /* class : access using (.) but id access using (#)*/
+
 html {
   font-size: 14px;
 }
@@ -46,4 +48,23 @@ input[type=number]
 .field-validation-error
 {
     font-size: 14px;
+}
+
+.poster {
+    min-height: 236px; /* to determine volume of area spicific for image */
+
+    background-size: 100%; /* to making photo appear completly*/
+
+    background-position: center; /* to image zooming from center of it */
+
+    transition: all 0.3s ease-in-out; /*to imge zooming when user toutch it*/
+}
+
+.poster:hover   
+{
+    
+
+    background-size: 120%; /* size of zooming */
+
+    transition: all 0.3s ease-in-out;
 }

@@ -5,9 +5,12 @@ using System.Collections.Generic;
 
 namespace Crud.Net.ViewModels
 {
+    // MovieFormViewModel : using this name to use this file in multiple purpos
     public class MovieFormViewModel
     {
         //code smilar to code of Movies whith slitly diff
+
+        public int Id { get; set; } // this id which user edit its movie in site
 
         [Required, StringLength(250)]
         [Display(Name = "Title")]
