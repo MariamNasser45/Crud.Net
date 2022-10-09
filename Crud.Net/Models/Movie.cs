@@ -21,7 +21,7 @@ namespace Crud.Net.Models
         public byte[] ?Poster { get; set; } 
 
                          // define relationship between tables
-        public int? GenreId { get; set; }
+        public int? GenreId { get; set; } // 
 
          public Genre? Genre { get; set; }
          

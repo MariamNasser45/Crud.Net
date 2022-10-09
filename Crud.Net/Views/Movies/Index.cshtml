@@ -90,7 +90,7 @@
                                                                                       
                                         </p>
 
-                                        <div > @* CREATE BUTTONS *@ 
+                                        <div > @* CREATE BUTTONS *@
 
                                             <a asp-action="Details" asp-route-id="@movie.Id " class="btn btn-outline-secondary">
 
@@ -106,10 +106,14 @@
                                                 Edit
                                             </a>
 
-                                        <a asp-action="Delete" asp-route-id="@movie.Id " class="btn btn-danger">
+                                            @* Whilw using Delete button dont need it open other page so we needn't <a> tag*@
+                                            @*need only selector to working by it witj java script or jquery , id of movie to delet it*@
+
+
+                                        <a href="javascript:;" class="btn btn-danger js-delete" data-id="@movie.Id"> @*js-delede :the selector  *@
 
                                             <i class="bi bi-trash"> </i> @*icon from bootstrap*@
-                                           Delete
+                                                Delete
                                         </a>
 
                                             </div> @*asp-rout : is the id of selected movies*@
@@ -128,3 +132,65 @@
     }
 
 </div>
+                        @* coding of javascripr to apply coding of delete button*@
+
+                                        
+@section Scripts{
+
+    <script>
+        $(document).ready(function(){
+            // select delete button using class to define function esecute when user click on button
+
+            $('.js-delete').on('click', function(){
+
+                //now check about code of selection id runing true
+
+                var btn = $(this);
+
+                console.log(btn.data('id'));  // to Help in check about Code is Correct
+
+                //var result = confirm('Are You Sure That You Need To Delete This Movie?')
+
+                console.log('result');
+
+                bootbox.confirm({
+                    message: "Are You Sure That You Need To Delete This Movie?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) // result is boolian then returm true or false if true execute net code
+
+                        {
+                            $.ajax({
+                                url: '/movies/delete/' + btn.data("id"), // path execute when click on delete button
+
+                                success: function ()  // applied when movie actully is deleted
+                                {
+                                    btn.parents('.col-12').fadeOut();
+                                    //  toastr.succses('Movie Deleted Succssefully');
+                                },
+
+                                error: function () // applied when error occure w;ithen deledte movie
+                                {
+                                    //  toastr.error('Something Wrong');
+                                }
+                            })
+                        }
+                    }
+                }); // end of bootstrap
+
+       
+
+            });  
+        });
+    </script>
+
+}

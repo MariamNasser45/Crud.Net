@@ -19,6 +19,13 @@
         "css/bootstrap-datepicker.min.css",
         "css/bootstrap-datepicker.css"
       ]
+    },
+    {
+      "library": "bootbox.js@5.5.3",
+      "destination": "wwwroot/lib/bootbox.js/",
+      "files": [
+        "bootbox.min.js"
+      ]
     }
   ]
 }

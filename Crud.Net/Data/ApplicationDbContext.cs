@@ -12,7 +12,7 @@ namespace Crud.Net.Data
         }
 
         // we must define in DbContex to understad about them are tables in DB
-        //and the migration show them if we not write this 2 lines the migration will be emrty
+        //and the migration show them if we not write this 2 lines the migration will be empty
 
         public DbSet<Genre> ?Genres { get; set; }
         public DbSet<Movie> ?Movies { get; set; }

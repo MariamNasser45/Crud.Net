@@ -68,3 +68,8 @@ input[type=number]
 
     transition: all 0.3s ease-in-out;
 }
+
+.md-50-px /*to change space between nav par and content of page*/
+{
+    margin-top :50px;
+}

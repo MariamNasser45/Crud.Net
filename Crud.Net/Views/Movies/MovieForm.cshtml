@@ -3,84 +3,79 @@
                    @*Now we make same steps which we made view of sice*@
 
                    @*chanage form name from (Create) To (MovieForm) 
-                    inorder to using new name in return view instead of viewmodel
+                    inorder to using new name to returne name of view with viewmodel
                    *@
 
-@model MovieFormViewModel
+                   @* all actions execute defined in this form*@
+
+@model MovieFormViewModel 
 
 @{
-    ViewData["Title"] = "Movie form";
+    ViewData["Title"] = "Movie form";  // name of page
 }
 
-<h2> @(Model.Id > 0 ? "Edit" : "Create") Movie</h2>
+<h2> @(Model.Id > 0 ? "Edit" : "Create") Movie</h2>  @* title of form *@
+                                                     @*if id >0 means user editigd some movie  but 
+                                                     if id =0 means the user add movie*@
 
 <br />    @*to add new line*@
 
-<section class="row justify-content-between ">          @* this tag dividing row into 12 part*@
+<section class="row justify-content-between ">       @* this tag dividing row into 12 part*@
 
-    <div class="col-md-4">     @* this tag appear area of row which contai 4 column only 3 column*@
+    <div class="col-md-4">                           @* this tag appear area of row which consist of only 4 column *@                 
 
-
-                    @*Creat:is the name of view *@
-
-           @*using enctype="application/x-www-form-urlencoded" to recieve files and post them to server *@
-
-        <form method="POST" asp-action= "@(Model.Id > 0 ? "Edit" : "Create")" enctype="multipart/form-data">
-
+        <form method="POST" asp-action="@(Model.Id > 0 ? "Edit" : "Create")" enctype="multipart/form-data">   @*using enctype="application/x-www-form-urlencoded" to 
+                                                                                                              recieve files and post them to server *@
             <input type="hidden" asp-for="Id" />  @* cearte edit form*@
 
               @*taking classes from bootstrap to creat the view of model*@
 
-            <div class="form-group">
+            <div class="form-group">   @* creat Title box*@
 
-                <label class="text-muted" asp-for=Name ></label> <br /> @*Name is column in MovieFormViewModel*@
+                <label class="text-muted" asp-for=Name ></label> <br /> @*Name : is column in MovieFormViewModel*@
                 <input type="text" class="form-control" asp-for="Name" maxlength="250" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-
+                <span asp-validation-for="Name" class="text-danger"></span> @*applied in caseof error*@
             </div>
-
-                           @* Create drob down list to store all genres*@
-
-            <div class="form-group">
-
+                      
+            <div class="form-group">  @* Create drob down list to store all genres*@
+                
                 <label class="text-muted" asp-for="GenreId"></label> 
 
-                @*define posation of data , and data display to user*@
+                @*define location of data , and data display to user*@
                 @*Id , Name attribute which defined in class Genre*@
 
                 <select class="form-control" asp-for="GenreId"
-                        asp-items="@(new SelectList(Model.Genres , "Id", "Name"))"> 
+                        asp-items="@(new SelectList(Model.Genres , "Id", "Name"))">  @*SelectList : to making list for each (id: primary key of table genres) ,  its name of geners *@
+                                                                                   
                     <option></option>  @* used to make list empty for frist time*@
-
+             
                 </select>
 
                 <span asp-validation-for="GenreId" class="text-danger"></span>
 
             </div>
 
-                       @*Create year field in view*@
+                              @*Create year field in view*@
 
             <div class="form-group w-50"  > @* w-50 : class of bootstrap to decreas space of feld*@
 
-            <label class="text-muted" asp-for="Year"></label>           @*Year is column in MovieFormViewModel*@
+            <label class="text-muted" asp-for="Year"></label>           @*Year is column in MovieFormViewModel to put name upper its field*@
             <input type="number" class="form-control" asp-for="Year"  value="@(Model.Year > 0 ? Model.Year : string.Empty)"/> @*using attribute value to make place is empty *@
             <span asp-validation-for="Year" class="text-danger"></span>                                                          @*now replace empty in prameter value with value choosen from user  *@
 
-                @*too cancling arrows in year field using site.css*@
+                        @*too cancling arrows in year field using site.css*@
 
             </div>
-                       @*Create rate field in creat view*@
+                        @*Create rate field in creat view*@
 
             <div class="form-group w-50">  @* w-50 : class of bootstrap to decreas space of field*@
 
                 <label class="text-muted" asp-for="Rate"></label> <br />      @*Rate is column in MovieFormViewModel*@
                 <input type="number" class="form-control" asp-for="Rate" value="@(Model.Rate > 0 ? Model.Rate : string.Empty)" /> @*using attribute value to make place is empty *@
-                <span asp-validation-for="Rate " class="text-danger"></span>                                                        @*now replace empty in prameter value with value choosen from user  *@
-
+                <span asp-validation-for="Rate " class="text-danger"></span>                                                       @*now replace empty in prameter value with value choosen from user  *@
 
             </div>
-
-                               @*Create History field in creat view*@
+                               @*Create History field in view*@
 
             <div class="form-group">  
 
@@ -88,45 +83,28 @@
                 <textarea placeholder="Write story lines of movie" class="form-control" asp-for="History" maxlength="2500" rows="5"> </textarea> @*using textarea : to write history , using row : to determine num of rows allow to user to write in them *@
                 <span asp-validation-for="History " class="text-danger"></span>
 
-                @*To making user can't change in size ot text area : in css 
-                    textarea { resize = null}
-                *@
+                @*To making user can't change in size ot text area : in css textarea { resize = null}  *@
 
             </div> 
 
-                                @*Create poster in creat view
-
-                                 Note that : some changes in poster to apper in view
-
-                                 in poster : 1- input , 2- lable , 3- span
-
-                                *@
+                                @*Create poster in view  *@
 
 
-
-
-            <div class="custom-file">
-                               @* here using file becous it not number or text *@
+            <div class="custom-file">@*   here using file becous it not number or text *@
 
                 <label class="custom-file-label" asp-for="Poster"> </label>
-                <input type="file" class="custom-file-input" asp-for="Poster" accept="image/*" />
-              
-                @*accept="image/*" : to allow to add images , if we spicify som exetinsion using accept=.png , .jpj*@
-
+               
+                <input type="file" class="custom-file-input" asp-for="Poster" accept="image/*" /> @*accept="image/*" : to allow to add images ,
+                                                                                                  if we spicify som exetinsion using accept=.png , .jpj*@
                 <span asp-validation-for=Poster class="text-danger"></span>
 
-              </div>
-              
+              </div>              
 
-              @*creat two buttons
-                mt-4 : margin top used to space between field
-              *@
-              
+               @*creat two buttons , mt-4 : margin top used to space between field *@
 
               <button type="submit" class="btn btn-primary mt-3">Save</button>
-              <a asp-action="Index" class="btn btn-outline-secondary mt-3">
-                  Cancel
-              </a>
+
+              <a asp-action="Index" class="btn btn-outline-secondary mt-3"> Cancel </a>
 
         </form>
 
@@ -134,26 +112,17 @@
 
                    @* determine area which selected photo apper in it*@
 
+        <div class="col-md-5">
 
-                       <div class="col-md-5">
+        <div id="poster-container" class="@(Model.Id > 0 ? string.Empty:"d-none")">   @* (d-none) : used to dissapper alrt until user select image *@
+                                                                                      @* Id to working with image we can use class insted of id  *@
 
-        <div id="poster-container" class="@(Model.Id > 0 ? string.Empty:"d-none")">
-            @* we right with (d-none) this code to show only <div> tag contain  of img in edit form  *@
-
-                              @*Id to working with image csn we use class insted of id
-                              d-non : used to dissapper alrt until user select image *@
-
-                           <img src="@(Model.Id > 0 ? $"data:image/*;base64,{Convert.ToBase64String(Model.Poster)}" : string.Empty) "
-                                             alt="There are No images" class="img-thumbnail" /> 
-                         
-                           @*alt using to print massage in no exsist image*@
-                                                                                                                           
-                           @* code of source to render image "actully image" in edit form*@
-                     
+                         @* code of source to render image "actully image" in edit form*@
                        
-                       </div>
-
-                   </div>
+       <img src="@(Model.Id > 0 ? $"data:image/*;base64,{Convert.ToBase64String(Model.Poster)}" : string.Empty) "
+            alt="There are No images" class="img-thumbnail" /> @*alt using to print massage in no exsist image*@                                                                                                                                                                 
+           </div>
+        </div>
 </section>
 
                         @* to render image in site using jquery or javascript*@
