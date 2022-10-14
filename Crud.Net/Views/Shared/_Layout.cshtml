@@ -12,6 +12,7 @@
               @*Add link of bootstrap.cs which we added in wwwroot file*@
     <link href="~/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
     <link href="~/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="toastr.css" rel="stylesheet"
 
 </head>
 <body>
@@ -55,8 +56,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script src="c:\users\mariam nasser sayed\.nuget\packages\ntoastnotify\8.0.0\contentfiles\any\net6.0\wwwroot\toastr.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script><script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script src="toastr.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
+
+
+ 
 </body>
 </html>

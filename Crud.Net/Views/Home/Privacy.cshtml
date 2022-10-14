@@ -1,7 +1,33 @@
-﻿
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
 @{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+
+
+namespace ToastDemo.Pages
+{
+    public class PrivacyModel : PageModel
+    {
+        private readonly ILogger<PrivacyModel>
+    _logger;
+    private readonly INotyfService _toastNotification;
+
+    public PrivacyModel(ILogger<PrivacyModel>
+        logger, INotyfService toastNotification)
+        {
+        _logger = logger;
+        _toastNotification = toastNotification;
+        }
+
+        public void OnGet()
+        {
+
+        }
+        }
+        }

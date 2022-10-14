@@ -15,7 +15,7 @@ namespace Crud.Net.Data
         //and the migration show them if we not write this 2 lines the migration will be empty
 
         public DbSet<Genre> ?Genres { get; set; }
-        public DbSet<Movie> ?Movies { get; set; }
+        public DbSet<Movie> ? Movies { get; set; }
     }
 
 }

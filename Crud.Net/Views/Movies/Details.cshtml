@@ -8,10 +8,12 @@
     ViewData["Title"] = Model.Name; // title of page will be the name of movie choosen by user
 }
 
+
+
                            @*bootstrab code*@
 
 <div class="row mt-100-px justify-content-between" style="text-align:justify "> @* justify-content-between to make 3 column remai betwwen text , poster*@
-    <div class="col-md-3">   @* to poster will appear in page of detalies*@
+    <div class="col-md-3">   @* to poster will appear in page of detalies*@   
         <img src="data:image/*;base64, @(Convert.ToBase64String(Model.Poster))" 
         class="img-thumbnail" alt="poster of movie @Model.Name not exist"/>
     </div>
@@ -47,7 +49,7 @@
 
                 <i class="bi bi-film"></i>
 
-                @Model.Genre.Name;
+                @Model.Genre?.Name;
 
             </span>
 

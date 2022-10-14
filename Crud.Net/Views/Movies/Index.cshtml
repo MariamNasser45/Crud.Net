@@ -2,6 +2,8 @@
 
 @using System.Collections
 
+
+
                          @*Define list of movie using IEnumerable or List*@
 
 @model IEnumerable<Movie>
@@ -9,6 +11,7 @@
                          @*to set title of movies page*@
 @{
     ViewData["Title"] = "Movies";
+
 }
                          @*Using h tag to write Head of page*@
 <h3>
@@ -18,6 +21,7 @@
     Movies
 
 </h3>
+
 
                          @*creat button to open page allow to add movie*@
                          @*btn btn=primary is bootstrap class*@
@@ -175,12 +179,12 @@
                                 success: function ()  // applied when movie actully is deleted
                                 {
                                     btn.parents('.col-12').fadeOut();
-                                    //  toastr.succses('Movie Deleted Succssefully');
+                                    toastr.success ('Movie Deleted Succssefully');
                                 },
 
                                 error: function () // applied when error occure w;ithen deledte movie
                                 {
-                                    //  toastr.error('Something Wrong');
+                                    
                                 }
                             })
                         }

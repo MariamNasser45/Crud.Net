@@ -14,7 +14,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Xml.Linq;
 using static Humanizer.In;
-// if (condition) y default return True
+                                      // if (condition) by default return True
 
 
 namespace Crud.Net.Controllers
@@ -40,11 +40,11 @@ namespace Crud.Net.Controllers
         private readonly ApplicationDbContext _Context;    // since we need to work with DB 
                                                            //Then we take an INSTANCE from DbContext
 
-        public MoviesController(ApplicationDbContext Context /*IToastNotification toastNotification*/)  // and making constructor take instance of Dbcontext As prametere
+        public MoviesController(ApplicationDbContext Context ,IToastNotification toastNotification)  // and making constructor take instance of Dbcontext As prametere
 
         {
             _Context = Context; //now we can working with DB using the last instance
-                                //_toastNotification = toastNotification;  
+             _toastNotification = toastNotification;  
 
         }
         // comlete of async : Asynchronous
@@ -54,7 +54,7 @@ namespace Crud.Net.Controllers
         public async Task<IActionResult> Index()  //To make Index.cshtml able to access data from DB
                                                   // Index responsible for data appear in form
         {
-            var movies = await _Context.Movies.OrderByDescending(m => m.Rate).ToListAsync(); // movies variable linking with movie table in DB
+            var  movies = await _Context.Movies.OrderByDescending(m => m.Rate).ToListAsync(); // movies variable linking with movie table in DB
                                                                                              // using OrderByDescending to arrange movies based on rate
             return View(movies); // return list of existing movies in DB
         }
@@ -176,7 +176,7 @@ namespace Crud.Net.Controllers
 
             _Context.SaveChanges(); // to send changes in form to DB
 
-            // _toastNotification.AddSuccessToastMessage("Movie Created Successfully");
+            _toastNotification.AddSuccessToastMessage("Movie Created Successfully");
 
             /*return View(model);*/                           // this is mistake and error will occure because it cannot make population to dropdownlist
                                                               // becuas the accept model has null genres so it can not select drobdownlist from null
@@ -291,11 +291,11 @@ namespace Crud.Net.Controllers
                 movie.Rate = model.Rate;
                 _Context.SaveChanges();
 
-                //  _toastNotification.AddSuccessToastMessage("Movie Updated Successfully");
+                _toastNotification.AddSuccessToastMessage("Movie Updated Successfully");
 
                 return RedirectToAction(nameof(Index));
 
-            }
+            };
         }
         // Create action of button Detalies
         public async Task<IActionResult> Details(int? id) // after spicify acction now create its view
@@ -313,7 +313,7 @@ namespace Crud.Net.Controllers
             //Not that : findAsync not work with Include(m => m.Genre) so we using other cretria
         }
 
-        public async Task<IActionResult> delete(int? id) // after spicify acction now create its view
+        public async Task<IActionResult> Delete(int? id) // after spicify acction now create its view
         {
             // cheack user choose exist id or note
 
@@ -329,7 +329,7 @@ namespace Crud.Net.Controllers
 
             _Context.SaveChanges();
 
-            return Ok(); //appear to user when movie delet successful
+            return Ok();        //appear to user when movie delet successful
         }
     }
 }
