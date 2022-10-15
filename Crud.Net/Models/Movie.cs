@@ -6,6 +6,7 @@ namespace Crud.Net.Models
 {
     public class Movie
     {
+        
         public int Id { get; set; }
 
         [Required, MaxLength(250)]

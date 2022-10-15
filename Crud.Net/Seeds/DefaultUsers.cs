@@ -78,7 +78,7 @@ namespace Crud.Net.Seeds
         //this method to assigned permissions for the role  'must make this for all module in the app'
         public static async Task AddPermisionClaims(this RoleManager<IdentityRole> rolemanager , IdentityRole role , string module ) // in this we need 1- type of role which we need assigne permision to it
         {                                                                                                                           // module  which assigned its permissions to this role                          
-            var allclaims = await rolemanager.GetClaimsAsync(role);  // check if there exist clazims or not    
+            var allclaims = await rolemanager.GetClaimsAsync(role);  // check if there exist claims or not    
 
             // we need generate name of this permision so we nead creating method or function make this
             // instead of write code each time need this

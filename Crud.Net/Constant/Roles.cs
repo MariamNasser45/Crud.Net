@@ -4,9 +4,9 @@ namespace Crud.Net.Constant
 {
     public enum Roles
     {
-        // Needing Roles ... changedc based on business requrement
+        // Needing Roles ... changed based on business requrement
 
-        SuperAdmin,
+        SuperAdmin, // THIS ROLE HAS ALL PERMISSIONS
         Admin,
         Basic
 
