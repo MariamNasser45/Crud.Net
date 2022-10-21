@@ -1,5 +1,5 @@
 ﻿
-                                 //in this define the roles of type Enum or const 
+                        //in this define the roles of type Enum or const 
 namespace Crud.Net.Constant
 {
     public enum Roles
@@ -8,8 +8,8 @@ namespace Crud.Net.Constant
 
         SuperAdmin, // THIS ROLE HAS ALL PERMISSIONS
         Admin,
-        Basic
-
+        Basic       // User
+  
     }
 
 }

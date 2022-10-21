@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using static Humanizer.On;
+
 
 namespace Crud.Net.Models
 {

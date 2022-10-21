@@ -13,7 +13,7 @@ namespace Crud.Net.Constant
 
                 $"Permisions.{module}.view",       // {} using to write c# code
                 $"Permisions.{module}.Create",    // thes permisions(create , view ,...) changed according to required  
-                $"Permisions.{module}.Edit",     // permission.module name.name of permision
+                $"Permisions.{module}.Edit",     // permission.module.name of permision
                 $"Permisions.{module}.Delete",
 
             };

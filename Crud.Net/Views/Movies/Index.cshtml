@@ -12,6 +12,7 @@
 @{
     ViewData["Title"] = "Movies";
 
+
 }
                          @*Using h tag to write Head of page*@
 <h3>
@@ -68,20 +69,27 @@
                          @* style form 'card title' from bootstrab*@
 
                     <div class="card mb-3 " >
-                        <div class="row no-gutters">
+                        <div class="row no-gutters"> @*row no-gutters: use to redmoving spaces between rows , columna*@
 
                             <div class="col-md-2 poster"  style="background-image:
                               url(data:image\/*;base64,@(Convert.ToBase64String(movie.Poster)))">  @*Converting data in Db to suitable with data type defined in c#*@        
                           </div>
                             <div class="col-md-10">
                                 <div class="card-body  d-flex flex-column justify-content-between h-100"> @*using this class from bootstrap to making directiom from up to down not ltr*@
-                                   
                                                                                                           @*and making rate at the down not after histori directe / h-100 to take complete width of form*@ 
                                     <div style="text-align:justify">   @*MAKING TEXT JUSTIFY*@
                                    <h5 class="card-title">@movie.Name (@movie.year)</h5>
-                                        <p class="card-text "  >@(movie.History.Length > 500 ? $"{movie.History.Substring(0, 500)} read more" : movie.History)</p> @*if text characeter > 500 then appear only 500 char and read more*@
-                                    </div>
+                                        <p class="card-text" id="readmore">
+                                           @if (movie.History.Length > 500)
+                                        {
+                                            @(movie.History.Substring(0, 500))
+                                            <a asp-action="ReadMore" asp-route-id="@movie.Id">  Read More  </a>
+                                        }
+                                        @if ( movie.History.Length < 500)
+                                            @(movie.History)
+                                        </p>
 
+                                    </div>
                                     <div class="d-flex justify-content-between" > @*we deviding code into 2 seprate dive to will add buttons*@
 
                                         <p class="card-text mt-2 mb-0">

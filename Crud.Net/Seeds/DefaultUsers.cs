@@ -22,11 +22,11 @@ namespace Crud.Net.Seeds
             // if run program then stoped it ant rerunning again program run as the frist time so
            // must check if this user exist in  DB or not to prevent error of duplicate data of basic user
        
-             var user= usermanager.FindByEmailAsync(defaultuser.Email);
+             var user= await usermanager.FindByEmailAsync(defaultuser.Email);
                 
              if(user==null) // if this email not exist in DB then creat it
             {
-                await usermanager.CreateAsync(defaultuser, "Password123"); // create async recieve 2 parameter 'email , password'
+                await usermanager.CreateAsync(defaultuser, "P@assword123"); // create async recieve 2 parameter 'email , password'
                                                                            // pass must be need speccial char , number ,.... we can chanage this requirement bby edit its configration
                 
                                                                                          // assigne permision to basic user role
@@ -49,12 +49,12 @@ namespace Crud.Net.Seeds
             // if run program then stoped it ant rerunning again program run as the frist time so
            // must check if this user exist in  DB or not to prevent error of duplicate data of user
 
-            var user = usermanager.FindByEmailAsync(defaultuser.Email);
+            var user = await usermanager.FindByEmailAsync(defaultuser.Email);
 
             if (user == null) // if this email not exist in DB then creat it
             {
                                                                             //creation of user 
-                await usermanager.CreateAsync(defaultuser, "Password123"); // create async recieve 2 parameter 'email , password'
+                await usermanager.CreateAsync(defaultuser, "P@assword123"); // create async recieve 2 parameter 'email , password'
                                                                           // pass must be need speccial char , number ,.... we can chanage this requirement bby edit its configration
                                                                          // assigne to basic user role 
 

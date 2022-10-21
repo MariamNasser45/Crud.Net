@@ -3,7 +3,6 @@
 using Crud.Net.Data;
 using Crud.Net.Models;
 using Crud.Net.ViewModels;
-using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -13,7 +12,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Xml.Linq;
-using static Humanizer.In;
+
                                       // if (condition) by default return True
 
 
@@ -331,6 +330,24 @@ namespace Crud.Net.Controllers
 
             return Ok();        //appear to user when movie delet successful
         }
+        // creat action of read more
+
+        //public async Task<IActionResult>ReadMore(int? id )
+        //{
+        //    if (id == null)
+        //        return BadRequest();
+        //   var hist = await _Context.Movies.FindAsync(id); // cheack if Id in DB contain movie  or not
+        //    if (hist == null)                                                  // Include(m=>m.Genre) : to returne genres from DB to can access it in details form                                                                     
+        //        return NotFound();                                             // if we not use Include(m=>m.Genre) the gener will be null and error will occure in details form
+        //    int Histlenght = hist.History.Length;
+
+        //    return hist.History.Substring(501,"Histlenght")    // in case user choose id exist and contain movies in DB
+
+        //}
+
+
     }
+
 }
+
               
