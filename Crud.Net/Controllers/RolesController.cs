@@ -47,14 +47,14 @@ namespace Crud.Net.Controllers
 
             // cheack if exist role in DB with the same name of add new role to avoid dublicate data error
 
-            if (await _roleManager.RoleExistsAsync(model.Name))
+            if (await _roleManager.RoleExistsAsync(addrole.Name))
             {
              
                 ModelState.AddModelError("Name", "Role is exists!"); // error massage in case of exist role
                 return View("RolesIndex", await _roleManager.Roles.ToListAsync());
             }
 
-            await _roleManager.CreateAsync(new IdentityRole(model.Name.Trim())); //.Trim : to remove unuseful spaces 
+            await _roleManager.CreateAsync(new IdentityRole(addrole.Name.Trim())); //.Trim : to remove unuseful spaces 
 
             return RedirectToAction(nameof(RolesIndex));
         }
