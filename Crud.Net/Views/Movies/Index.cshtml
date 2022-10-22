@@ -181,7 +181,8 @@
                         if (result) // result is boolian then returm true or false if true execute net code
 
                         {
-                            $.ajax({
+                            $.ajax
+                            ({
                                 url: '/movies/delete/' + btn.data("id"), // path execute when click on delete button
 
                                 success: function ()  // applied when movie actully is deleted

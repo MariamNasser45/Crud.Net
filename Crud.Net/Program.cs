@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // DEFINE LIB OF NOTIFICATIONS
 builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 {
@@ -26,6 +27,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 });
 
 // Add services to the container.
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -33,36 +35,48 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //since we used IdentityRoles in cod then must define it here : replace .AddDefaultIdentity by .AddIdentity then add IdentityRole
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{ //options can be used to add spicifc options for email , pass
+    options.SignIn.RequireConfirmedAccount = true;
+
+   // options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._ ";
+  
+}).AddEntityFrameworkStores<ApplicationDbContext>();
+
 builder.Services.AddControllersWithViews();
 
-// define variables to access roles , users in its classes
-
 //var roleManager = builder.Services.AddIdentityCore<RoleManager<IdentityRole>>();
-//var userManager = builder.Services.AddIdentityCore<UserManager<IdentityUser>>();
+//var userManager = builder.Services.AddIdentityCore<UserManager<IdentityUser>>(); this don't return service only build method
 
 
 //builder.Services.AddScoped(DefaultRoles.SeedAsync(roleManager));
 //builder.Services.AddScoped(DefaultUsers.SeedBasicUserAsync(userManager));
-//builder.Services.AddScoped(DefaultUsers.SeedSuperAdminAsync(userManager, roleManager));
+//builder.Services.AddScoped(DefaultUsers.SeedSuperAdminAsync(userManager, roleManager)); 
 
 var app = builder.Build();
 
-using var scope = app.Services.CreateScope();
+// command from  line 49 - 55 must be writen after line 57 
+
+using var scope = app.Services.CreateScope(); // creating scope
 
 var services = scope.ServiceProvider;
 var loggerFactory = services.GetRequiredService<ILoggerProvider>();
-var logger = loggerFactory.CreateLogger("app");
+var logger = loggerFactory.CreateLogger("app"); 
 
 try
 {
+    // define variables to access roles , users in its classes
+
     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    //seeding data to DB
 
     await Crud.Net.Seeds.DefaultRoles.SeedAsync(roleManager);
     await Crud.Net.Seeds.DefaultUsers.SeedBasicUserAsync(userManager);
     await Crud.Net.Seeds.DefaultUsers.SeedSuperAdminAsync(userManager, roleManager);
+
+    // to returne notifications
 
     logger.LogInformation("Data seeded");
     logger.LogInformation("Application Started");
@@ -99,6 +113,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.UseNToastNotify(); // tu define toast notification
 app.MapRazorPages();
 
 app.Run();
