@@ -30,7 +30,7 @@ namespace Crud.Net.Controllers
             _signInManager = signInManager; 
 
         }
-        //define action of UsersIndex
+        //define action of UsersIndex 
         public async Task<IActionResult> UsersIndex()
         {
             // define variable of usermanager to work with properties of user
@@ -50,7 +50,7 @@ namespace Crud.Net.Controllers
 
         // creat actions of manage role , update role
 
-        public async Task<IActionResult> ManageRoles(string userId)
+        public async Task<IActionResult> ManageRoles (string userId) // action of Manage rol button
         {
             // ManageRoles : is get method work with recieved Id
             // check if id exist in db or not
@@ -65,7 +65,7 @@ namespace Crud.Net.Controllers
             {
                 UserId = userId,
                 UserName = user.UserName,
-                Roles = roles.Select(role => new RolesViewModel  // convert view to the view which i need
+                Roles = roles.Select(role => new CheackBoxViewModel  // convert view to the view which i need
                 {
                     RoleName = role.Name,
                     IsSelected = _userManager.IsInRoleAsync(user, role.Name).Result  //isselected return true if the user assigen rols which i need to know about it
@@ -78,7 +78,7 @@ namespace Crud.Net.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> UpdateRoles(UsersRolesViewModel model)
+        public async Task<IActionResult> UpdateRoles(UsersRolesViewModel model) // action of save button in manage roles view
         {
 
             // cheack userid exist or not in DB

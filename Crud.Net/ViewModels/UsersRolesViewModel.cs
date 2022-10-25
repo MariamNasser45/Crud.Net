@@ -6,7 +6,7 @@
 
         public string UserName { get; set; }  // hint to admin to know which user is managed
 
-        public List<RolesViewModel> Roles { get; set; }
+        public List<CheackBoxViewModel> Roles { get; set; }
 
         // now goto usercontroller to define action of manageroles
     }

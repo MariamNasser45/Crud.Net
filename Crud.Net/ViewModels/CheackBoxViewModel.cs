@@ -6,7 +6,9 @@
 
 namespace Crud.Net.ViewModels
 {
-    public class RolesViewModel
+    // chsnge name of model from Roles view to CheackBox to making it Geniric ' to create cheackbox whith name of roles
+    // in multiple views instead of write same code more than one'
+    public class CheackBoxViewModel
     {
         public string RoleName { get; set; }
 
