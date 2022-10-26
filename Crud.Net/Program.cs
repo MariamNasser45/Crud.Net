@@ -2,7 +2,6 @@ using System;
 using Crud.Net.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using NToastNotify;
 using Crud.Net.Seeds;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -13,7 +12,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using AspNetCoreHero.ToastNotification;
+using NToastNotify;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,14 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 {
     ProgressBar = true,
     Timeout = 3000
+});
+
+// Add ToastNotification
+builder.Services.AddNotyf(config =>
+{
+    config.DurationInSeconds = 5;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopRight;
 });
 
 // Add services to the container.
@@ -87,8 +96,6 @@ catch (System.Exception ex)
 }
 
 
-app.MapRazorPages();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -103,11 +110,13 @@ else
 
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -115,6 +124,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.UseNToastNotify(); // tu define toast notification
+
+app.UseNotyf();
+
 app.MapRazorPages();
 
 app.Run();

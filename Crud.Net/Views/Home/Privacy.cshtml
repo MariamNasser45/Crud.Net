@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 @{
     ViewData["Title"] = "Privacy Policy";
@@ -7,8 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
-
-
 
 namespace ToastDemo.Pages
 {
@@ -27,6 +26,12 @@ namespace ToastDemo.Pages
 
         public void OnGet()
         {
+
+        _toastNotification.Success("A success for christian-schou.dk");
+        _toastNotification.Information("Here is an info toast - closes in 6 seconds.", 6);
+        _toastNotification.Warning("Be aware, here is a warning toast.");
+        _toastNotification.Error("Ouch - An error occured. This message closes in 4 seconds.", 4);
+        _toastNotification.Custom("Please check the settings for your profile - closes in 6 seconds.", 6, "#0c343d", "fa fa-user");
 
         }
         }

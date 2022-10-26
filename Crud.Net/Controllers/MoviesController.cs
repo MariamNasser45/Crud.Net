@@ -220,7 +220,7 @@ namespace Crud.Net.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Edi(MovieFormViewModel model)
+        public async Task<IActionResult> Edit(MovieFormViewModel model)
         {
             if (!ModelState.IsValid) // in case if Model state not exsist returne the model
             {

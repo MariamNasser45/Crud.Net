@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NToastNotify;
 
 namespace Crud.Net.Areas.Identity.Pages.Account.Manage
 {
@@ -16,6 +17,8 @@ namespace Crud.Net.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ILogger<IndexModel> _logger;
+        private readonly IToastNotification _toastNotification;
 
         public IndexModel(
             UserManager<IdentityUser> userManager,
@@ -114,6 +117,27 @@ namespace Crud.Net.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
-       
+
+        //adding toast notifications to the OnGet() method inside 
+        public IndexModel(ILogger<IndexModel> logger, IToastNotification toastNotification)
+        {
+            _logger = logger;
+            _toastNotification = toastNotification;
+        }
+        public void OnGet()
+        {
+            //Success Toast
+
+            _toastNotification.AddSuccessToastMessage("Woo hoo - it works!");
+
+            // Info Toast
+            _toastNotification.AddInfoToastMessage("Here is some information.");
+
+            // Error Toast
+            _toastNotification.AddErrorToastMessage("Woops an error occured.");
+
+          
+        }
+
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Crud.Net.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-
 namespace Crud.Net.Controllers
 {
     public class HomeController : Controller
