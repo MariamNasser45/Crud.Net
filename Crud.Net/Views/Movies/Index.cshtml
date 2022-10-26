@@ -1,7 +1,9 @@
 ﻿               @*Since the  model is a collection of views [List of movies] *@
 
 @using System.Collections
-
+@using AspNetCoreHero.ToastNotification;
+@using NToastNotify;
+@using AspNetCoreHero.ToastNotification.Extensions;
 
 
                          @*Define list of movie using IEnumerable or List*@
@@ -188,7 +190,8 @@
                                 success: function ()  // applied when movie actully is deleted
                                 {
                                     btn.parents('.col-12').fadeOut();
-                                    toastr.success ('Movie Deleted Succssefully');
+                                    //toastr.success ('Movie Deleted Succssefully');
+                                  
                                 },
 
                                 error: function () // applied when error occure w;ithen deledte movie

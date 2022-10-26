@@ -20,14 +20,26 @@ using AspNetCoreHero.ToastNotification.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// DEFINE LIB OF NOTIFICATIONS
+// register of NOTIFICATIONS
 builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 {
     ProgressBar = true,
-    Timeout = 3000
+    Timeout = 3000,
+
 });
 
+
+//builder.Services.AddRazorPages().AddNToastNotifyToastr(new ToastrOptions()
+//{
+//    ProgressBar = true,
+//    PositionClass = ToastPositions.TopRight,
+//    PreventDuplicates = true,
+//    CloseButton = true //to user closs tab if need
+//});
+//builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 // Add ToastNotification
+
 builder.Services.AddNotyf(config =>
 {
     config.DurationInSeconds = 5;
@@ -61,6 +73,10 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddScoped(DefaultRoles.SeedAsync(roleManager));
 //builder.Services.AddScoped(DefaultUsers.SeedBasicUserAsync(userManager));
 //builder.Services.AddScoped(DefaultUsers.SeedSuperAdminAsync(userManager, roleManager)); 
+
+
+builder.Services.AddMvc().AddNToastNotifyNoty();
+builder.Services.AddMvc().AddNToastNotifyToastr();
 
 var app = builder.Build();
 

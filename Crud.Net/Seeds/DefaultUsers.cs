@@ -72,7 +72,7 @@ namespace Crud.Net.Seeds
             var adminrole = await rolemanager.FindByNameAsync(Roles.SuperAdmin.ToString()); // select the role to make permissions of  this
 
                                                                          // now using fun which generate all name of permisions
-            await rolemanager.AddPermisionClaims(adminrole , "Permisions"); //AddPermisionClaims recieve : role , module name
+            await rolemanager.AddPermisionClaims(adminrole , "Products"); //AddPermisionClaims recieve : role , module name
         }
 
         //this method to assigned permissions for the role  'must make this for all module in the app'

@@ -1,19 +1,14 @@
-﻿                      //  all views defined in this form
+﻿//  all views defined in this form
 
 using Crud.Net.Data;
 using Crud.Net.Models;
 using Crud.Net.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Hosting;
 using NToastNotify;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Xml.Linq;
+using NToastNotify.Helpers;
 
-                                      // if (condition) by default return True
+// if (condition) by default return True
 
 
 namespace Crud.Net.Controllers
@@ -293,7 +288,6 @@ namespace Crud.Net.Controllers
                 _toastNotification.AddSuccessToastMessage("Movie Updated Successfully");
 
                 return RedirectToAction(nameof(Index));
-
             };
         }
         // Create action of button Detalies
@@ -328,7 +322,8 @@ namespace Crud.Net.Controllers
 
             _Context.SaveChanges();
 
-            return Ok();        //appear to user when movie delet successful
+             _toastNotification.AddWarningToastMessage("Movie Deleted Successfuly");
+            return Ok();   //appear to user when movie delet successful
         }
         // creat action of read more
 

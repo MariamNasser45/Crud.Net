@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using System.Security.Claims;
 
 namespace Crud.Net.Controllers
 {
@@ -106,6 +108,43 @@ namespace Crud.Net.Controllers
 
             return View(viewmodel);    
             
+        }
+
+        // creat (post action) of button managepermissions
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManagePermissions(PermissionsFormViewModel model)
+        {
+            var role = await _roleManager.FindByIdAsync(model.RoleId); // cheack existance of recieved ID
+            if (role == null)
+                return NotFound();
+
+
+            var roleclaims = await _roleManager.GetClaimsAsync(role); // to show all Claims 'permission' for current role 'to update it'
+
+            //to get all permissions "12" can be assigne on the role
+            //action samiler to update action but (rolemanager) not contain
+            //RemoveFromRolesAsync so using RemoveFromRoleAsync in loop
+
+            foreach(var claims in roleclaims) //remove all claims
+            {
+                await _roleManager.RemoveClaimAsync(role, claims); // remove claims one by one , take(role name , claims wich need prove)
+            }
+
+            //add claims one by one to _rolemanager not suppor AddClaimsAsync
+
+            var SelectedClaims = model.RoleCalims.Where(r => r.IsSelected).ToList(); // get only claims which  the end user selected them
+
+
+            // need to loop  on SelectedClaims to add selected claim by user on current role to update
+            foreach(var claims in SelectedClaims)
+            {
+                await _roleManager.AddClaimAsync(role, new Claim("Permisions", claims.RoleName)); // role : role to update , claim("Permisions") : type of claim determine in DB , name of permission
+            }
+
+            return View(nameof(RolesIndex));
+
         }
 
     }

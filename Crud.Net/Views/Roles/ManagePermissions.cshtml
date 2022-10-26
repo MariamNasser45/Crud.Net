@@ -48,6 +48,7 @@
                                     
                                 </div>
                             </td>
+                            @*to make space beween 2 columns*@
                             <td>@Model.RoleCalims[i].RoleName.Split('.')[1]</td>
                             <td>@Model.RoleCalims[i].RoleName.Split('.')[2]</td>
                         </tr>
@@ -58,11 +59,10 @@
             <div asp-validation-summary="All" class="text-danger"></div>  @*validation-summary : use to if exist error warning me*@
         </div>
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Save</button> @*post data to server*@
+            <button type="submit" asp-action="RolesIndex"  class="btn btn-primary">Save</button> @*post data to server*@
             <a asp-action="RolesIndex" class="btn btn-secondary">Cancel</a>
         </div>
     </div>
-
 
 </form>
 
