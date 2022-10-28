@@ -1,12 +1,14 @@
 ﻿@inject IAuthorizationService AuthorizationService
-
-@using Crud.Net.Constant
+@using System.Security.Claims
+@using System;
+@using System.Threading.Tasks;
+@using Crud.Net.Constant;
 
 @{
     ViewData["Title"] = "Policy";
 }
 
-<h1>Manage Policy</h1>
+<h1>Manage Product</h1>
 <hr />
 
 @* now create buttons for 4 permissions which are defined (edit , delete , create, view)*@
@@ -21,7 +23,7 @@
     <a href="#" class="btn btn-secondary">Create</a>
 }
 
-@if (AuthorizationService.AuthorizeAsync(User, Permisions.Products.Edit).Result.Succeeded)
+@if ((AuthorizationService.AuthorizeAsync(User, Permisions.Products.Edit)).Result.Succeeded)
 {
     <a asp-action="Edit" class="btn btn-success">Edit</a>
 }

@@ -21,6 +21,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Crud.Net.Areas.Identity.Pages.Account
 {
+    
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

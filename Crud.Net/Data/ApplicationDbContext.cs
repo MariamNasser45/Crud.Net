@@ -16,6 +16,9 @@ namespace Crud.Net.Data
 
         public DbSet<Genre> ?Genres { get; set; }
         public DbSet<Movie> ? Movies { get; set; }
+        //public DbSet<LoginModel>? UserLogins { get; set; }
+
+
     }
 
 }

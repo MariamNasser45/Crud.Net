@@ -26,22 +26,20 @@ namespace Crud.Net.Constant
 
             var modules =Enum.GetValues(typeof(Modules));  // 1- using Enum  beacouse Modules typr 'Enum'
                                                            // returne array then using it to looping in all modules
-             foreach(var module in modules)
-            {
-                // for each module in modules class  returne list of all permissions so 
-                //using get method which recieve name of modul
+            
+            
+            foreach(var module in modules)
+                allpermission.AddRange(GeneratePermisionsList(module.ToString()));   // for each module in modules class  returne list of all permissions so 
+            return allpermission;                                                                  //using get method which recieve name of modul
 
-                allpermission.AddRange(GeneratePermisionsList(module.ToString()));
-            }
-            return allpermission;
-            }
+        }
 
         public static class Products
         {
-            public const string View = "Permissions.Products.View";
-            public const string Create = "Permissions.Products.Create";
-            public const string Edit = "Permissions.Products.Edit";
-            public const string Delete = "Permissions.Products.Delete";
+            public const string View = "Permisions.Products.View";
+            public const string Create = "Permisions.Products.Create";
+            public const string Edit = "Permisions.Products.Edit";
+            public const string Delete = "Permisions.Products.Delete";
         }
     }
     }

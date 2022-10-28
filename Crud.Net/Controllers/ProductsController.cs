@@ -5,14 +5,17 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Crud.Net.Controllers
 {
+
     public class ProductsController : Controller
     {
-        public IActionResult ProductsIndex()
+        public async Task < IActionResult> ProductsIndex()
         {
             return View();
         }
 
         //Create Edit Action
+
+        [Authorize(Permisions.Products.Edit)] //making onle roles have this permission can work with edit
         public IActionResult Edit()
         {
             return View();
