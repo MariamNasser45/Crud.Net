@@ -55,7 +55,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 //Add policy services
-//builder.Services.AddRazorPages();
+builder.Services.AddRazorPages();
 
 //builder.Services.AddAuthorization(options =>
 //{
