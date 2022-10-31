@@ -8,7 +8,7 @@ namespace Crud.Net.Controllers
 
     public class ProductsController : Controller
     {
-        public async Task < IActionResult> ProductsIndex()
+        public IActionResult ProductsIndex()
         {
             return View();
         }

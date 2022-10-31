@@ -1,4 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Crud.Net.Areas.Identity
 @using Crud.Net.Areas.Identity.Pages
+@using Crud.Net.Areas.Identity.Pages.Account
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Crud.Net
+@using Microsoft.AspNetCore.Authorization
+@using Crud.Net.Models 
+@inject IAuthorizationService Authorization
