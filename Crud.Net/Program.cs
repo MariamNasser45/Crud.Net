@@ -4,11 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using AspNetCoreHero.ToastNotification;
 using NToastNotify;
 using AspNetCoreHero.ToastNotification.Extensions;
-using Microsoft.AspNetCore.Authorization;
-using Crud.Net.Filter;
-using Microsoft.AspNetCore.Mvc.Authorization;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +27,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 5;
+    config.DurationInSeconds = 2;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 }); // end of notyfications define
@@ -54,24 +49,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-//Add policy services
-builder.Services.AddRazorPages();
-
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-//        .RequireAuthenticatedUser()
-//        .Build();
-//});
-
-//builder.Services.AddControllers(config =>
-//{
-//    var policy = new AuthorizationPolicyBuilder()
-//                     .RequireAuthenticatedUser()
-//                     .Build();
-//    config.Filters.Add(new AuthorizeFilter(policy));
-//});
-
 
 // make the end user able to allow see  result of any apply action without logout
 builder.Services.Configure<SecurityStampValidatorOptions>(options =>
@@ -82,17 +59,6 @@ builder.Services.Configure<SecurityStampValidatorOptions>(options =>
 // add notyfications services
 builder.Services.AddMvc().AddNToastNotifyNoty();
 builder.Services.AddMvc().AddNToastNotifyToastr();
-
-// Authorization handlers.
-//builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
-
-//builder.Services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
-
-//builder.Services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
-
-//End os Add services to the container.
-
-
 
 var app = builder.Build();  //Building start
 
@@ -112,7 +78,7 @@ try
     await Crud.Net.Seeds.DefaultUsers.SeedBasicUserAsync(userManager);
     await Crud.Net.Seeds.DefaultUsers.SeedSuperAdminAsync(userManager, roleManager);
 
-    // to returne notifications
+    //// to returne notifications
     logger.LogInformation("Data seeded");
     logger.LogInformation("Application Started");
 }
